@@ -27,11 +27,12 @@ jobs:
         run: docker push ghcr.io/${{ github.repository }}:latest
 
       - name: Deploy to Atlas
-
         run: |
-          echo "Deploying ${IMAGE_LC}:${TAG}"
           curl -X POST https://run.atlas.in.net/deploy \
-            -H "Content-Type: application/x-www-form-urlencoded" \
-            -d "token=abcd1234" \
-            -d '{"image":"ghcr.io/${{ github.repository }}:latest","name":"${{ github.event.repository.name }}"}'
-            -d "name=${{ github.event.repository.name }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+          "token": "abcd1234",
+          "image": "ghcr.io/${{ github.repository }}:latest",
+          "name": "${{ github.event.repository.name }}"
+          }'
+
