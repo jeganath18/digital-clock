@@ -28,11 +28,8 @@ jobs:
 
       - name: Deploy to Atlas
         run: |
-          curl -X POST https://run.atlas.in.net/deploy \
-          -H "Content-Type: application/json" \
-          -d '{
-          "token": "abcd1234",
-          "image": "ghcr.io/${{ github.repository }}:latest",
-          "name": "${{ github.event.repository.name }}"
-          }'
-
+          curl -X POST https://run.atlas.in.net/deploy             -H "Content-Type: application/json"             -d '{
+              "token": "abcd1234",
+              "image": "ghcr.io/${{ github.repository }}:latest",
+              "name": "${{ github.event.repository.name }}"
+            }'
